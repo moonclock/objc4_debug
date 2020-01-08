@@ -99,9 +99,9 @@ typedef struct {
  * Returns a copy of a given object.
  * 
  * @param obj An Objective-C object.
- * @param size The size of the object \e obj.
+ * @param size The size of the object obj.
  * 
- * @return A copy of \e obj.
+ * @return A copy of obj.
  */
 OBJC_EXPORT id _Nullable object_copy(id _Nullable obj, size_t size)
     OBJC_AVAILABLE(10.0, 2.0, 9.0, 1.0, 2.0)
@@ -124,8 +124,8 @@ object_dispose(id _Nullable obj)
  * 
  * @param obj The object you want to inspect.
  * 
- * @return The class object of which \e object is an instance, 
- *  or \c Nil if \e object is \c nil.
+ * @return The class object of which object is an instance,
+ *  or Nil if object is nil.
  */
 OBJC_EXPORT Class _Nullable
 object_getClass(id _Nullable obj) 
@@ -137,7 +137,7 @@ object_getClass(id _Nullable obj)
  * @param obj The object to modify.
  * @param cls A class object.
  * 
- * @return The previous value of \e object's class, or \c Nil if \e object is \c nil.
+ * @return The previous value of object's class, or Nil if object is nil.
  */
 OBJC_EXPORT Class _Nullable
 object_setClass(id _Nullable obj, Class _Nonnull cls) 
@@ -162,9 +162,9 @@ object_isClass(id _Nullable obj)
  * @param obj The object containing the instance variable whose value you want to read.
  * @param ivar The Ivar describing the instance variable whose value you want to read.
  * 
- * @return The value of the instance variable specified by \e ivar, or \c nil if \e object is \c nil.
+ * @return The value of the instance variable specified by ivar, or nil if object is nil.
  * 
- * @note \c object_getIvar is faster than \c object_getInstanceVariable if the Ivar
+ * @note object_getIvar is faster than object_getInstanceVariable if the Ivar
  *  for the instance variable is already known.
  */
 OBJC_EXPORT id _Nullable
@@ -181,7 +181,7 @@ object_getIvar(id _Nullable obj, Ivar _Nonnull ivar)
  * @note Instance variables with known memory management (such as ARC strong and weak)
  *  use that memory management. Instance variables with unknown memory management 
  *  are assigned as if they were unsafe_unretained.
- * @note \c object_setIvar is faster than \c object_setInstanceVariable if the Ivar
+ * @note object_setIvar is faster than object_setInstanceVariable if the Ivar
  *  for the instance variable is already known.
  */
 OBJC_EXPORT void
@@ -198,7 +198,7 @@ object_setIvar(id _Nullable obj, Ivar _Nonnull ivar, id _Nullable value)
  * @note Instance variables with known memory management (such as ARC strong and weak)
  *  use that memory management. Instance variables with unknown memory management 
  *  are assigned as if they were strong.
- * @note \c object_setIvar is faster than \c object_setInstanceVariable if the Ivar
+ * @note object_setIvar is faster than object_setInstanceVariable if the Ivar
  *  for the instance variable is already known.
  */
 OBJC_EXPORT void
@@ -214,8 +214,8 @@ object_setIvarWithStrongDefault(id _Nullable obj, Ivar _Nonnull ivar,
  * @param name A C string. Pass the name of the instance variable whose value you wish to modify.
  * @param value The new value for the instance variable.
  * 
- * @return A pointer to the \c Ivar data structure that defines the type and 
- *  name of the instance variable specified by \e name.
+ * @return A pointer to the Ivar data structure that defines the type and
+ *  name of the instance variable specified by name.
  *
  * @note Instance variables with known memory management (such as ARC strong and weak)
  *  use that memory management. Instance variables with unknown memory management 
@@ -235,8 +235,8 @@ object_setInstanceVariable(id _Nullable obj, const char * _Nonnull name,
  * @param name A C string. Pass the name of the instance variable whose value you wish to modify.
  * @param value The new value for the instance variable.
  * 
- * @return A pointer to the \c Ivar data structure that defines the type and 
- *  name of the instance variable specified by \e name.
+ * @return A pointer to the Ivar data structure that defines the type and
+ *  name of the instance variable specified by name.
  *
  * @note Instance variables with known memory management (such as ARC strong and weak)
  *  use that memory management. Instance variables with unknown memory management 
@@ -257,8 +257,8 @@ object_setInstanceVariableWithStrongDefault(id _Nullable obj,
  * @param name A C string. Pass the name of the instance variable whose value you wish to obtain.
  * @param outValue On return, contains a pointer to the value of the instance variable.
  * 
- * @return A pointer to the \c Ivar data structure that defines the type and name of
- *  the instance variable specified by \e name.
+ * @return A pointer to the Ivar data structure that defines the type and name of
+ *  the instance variable specified by name.
  */
 OBJC_EXPORT Ivar _Nullable
 object_getInstanceVariable(id _Nullable obj, const char * _Nonnull name,
@@ -274,12 +274,12 @@ object_getInstanceVariable(id _Nullable obj, const char * _Nonnull name,
  * 
  * @param name The name of the class to look up.
  * 
- * @return The Class object for the named class, or \c nil
+ * @return The Class object for the named class, or nil
  *  if the class is not registered with the Objective-C runtime.
  * 
- * @note \c objc_getClass is different from \c objc_lookUpClass in that if the class
- *  is not registered, \c objc_getClass calls the class handler callback and then checks
- *  a second time to see whether the class is registered. \c objc_lookUpClass does 
+ * @note objc_getClass is different from objc_lookUpClass in that if the class
+ *  is not registered, objc_getClass calls the class handler callback and then checks
+ *  a second time to see whether the class is registered. objc_lookUpClass does
  *  not call the class handler callback.
  * 
  * @warning Earlier implementations of this function (prior to OS X v10.0)
@@ -294,7 +294,7 @@ objc_getClass(const char * _Nonnull name)
  * 
  * @param name The name of the class to look up.
  * 
- * @return The \c Class object for the metaclass of the named class, or \c nil if the class
+ * @return The Class object for the metaclass of the named class, or nil if the class
  *  is not registered with the Objective-C runtime.
  * 
  * @note If the definition for the named class is not registered, this function calls the class handler
@@ -311,11 +311,11 @@ objc_getMetaClass(const char * _Nonnull name)
  * 
  * @param name The name of the class to look up.
  * 
- * @return The Class object for the named class, or \c nil if the class
+ * @return The Class object for the named class, or nil if the class
  *  is not registered with the Objective-C runtime.
  * 
- * @note \c objc_getClass is different from this function in that if the class is not
- *  registered, \c objc_getClass calls the class handler callback and then checks a second
+ * @note objc_getClass is different from this function in that if the class is not
+ *  registered, objc_getClass calls the class handler callback and then checks a second
  *  time to see whether the class is registered. This function does not call the class handler callback.
  */
 OBJC_EXPORT Class _Nullable
@@ -329,7 +329,7 @@ objc_lookUpClass(const char * _Nonnull name)
  * 
  * @return The Class object for the named class.
  * 
- * @note This function is the same as \c objc_getClass, but kills the process if the class is not found.
+ * @note This function is the same as objc_getClass, but kills the process if the class is not found.
  * @note This function is used by ZeroLink, where failing to find a class would be a compile-time link error without ZeroLink.
  */
 OBJC_EXPORT Class _Nonnull
@@ -339,20 +339,20 @@ objc_getRequiredClass(const char * _Nonnull name)
 /** 
  * Obtains the list of registered class definitions.
  * 
- * @param buffer An array of \c Class values. On output, each \c Class value points to
- *  one class definition, up to either \e bufferCount or the total number of registered classes,
- *  whichever is less. You can pass \c NULL to obtain the total number of registered class
+ * @param buffer An array of Class values. On output, each Class value points to
+ *  one class definition, up to either bufferCount or the total number of registered classes,
+ *  whichever is less. You can pass NULL to obtain the total number of registered class
  *  definitions without actually retrieving any class definitions.
  * @param bufferCount An integer value. Pass the number of pointers for which you have allocated space
- *  in \e buffer. On return, this function fills in only this number of elements. If this number is less
+ *  in buffer. On return, this function fills in only this number of elements. If this number is less
  *  than the number of registered classes, this function returns an arbitrary subset of the registered classes.
  * 
  * @return An integer value indicating the total number of registered classes.
  * 
  * @note The Objective-C runtime library automatically registers all the classes defined in your source code.
- *  You can create class definitions at runtime and register them with the \c objc_addClass function.
+ *  You can create class definitions at runtime and register them with the objc_addClass function.
  * 
- * @warning You cannot assume that class objects you get from this function are classes that inherit from \c NSObject,
+ * @warning You cannot assume that class objects you get from this function are classes that inherit from NSObject,
  *  so you cannot safely call any methods on such classes without detecting that the method is implemented first.
  */
 OBJC_EXPORT int
@@ -363,9 +363,9 @@ objc_getClassList(Class _Nonnull * _Nullable buffer, int bufferCount)
  * Creates and returns a list of pointers to all registered class definitions.
  * 
  * @param outCount An integer pointer used to store the number of classes returned by
- *  this function in the list. It can be \c nil.
+ *  this function in the list. It can be nil.
  * 
- * @return A nil terminated array of classes. It must be freed with \c free().
+ * @return A nil terminated array of classes. It must be freed with free().
  * 
  * @see objc_getClassList
  */
@@ -381,7 +381,7 @@ objc_copyClassList(unsigned int * _Nullable outCount)
  * 
  * @param cls A class object.
  * 
- * @return The name of the class, or the empty string if \e cls is \c Nil.
+ * @return The name of the class, or the empty string if cls is Nil.
  */
 OBJC_EXPORT const char * _Nonnull
 class_getName(Class _Nullable cls) 
@@ -392,8 +392,8 @@ class_getName(Class _Nullable cls)
  * 
  * @param cls A class object.
  * 
- * @return \c YES if \e cls is a metaclass, \c NO if \e cls is a non-meta class, 
- *  \c NO if \e cls is \c Nil.
+ * @return YES if cls is a metaclass, NO if cls is a non-meta class,
+ *  NO if cls is Nil.
  */
 OBJC_EXPORT BOOL
 class_isMetaClass(Class _Nullable cls) 
@@ -404,10 +404,10 @@ class_isMetaClass(Class _Nullable cls)
  * 
  * @param cls A class object.
  * 
- * @return The superclass of the class, or \c Nil if
- *  \e cls is a root class, or \c Nil if \e cls is \c Nil.
+ * @return The superclass of the class, or Nil if
+ *  cls is a root class, or Nil if cls is Nil.
  *
- * @note You should usually use \c NSObject's \c superclass method instead of this function.
+ * @note You should usually use NSObject's superclass method instead of this function.
  */
 OBJC_EXPORT Class _Nullable
 class_getSuperclass(Class _Nullable cls) 
@@ -434,7 +434,7 @@ class_setSuperclass(Class _Nonnull cls, Class _Nonnull newSuper)
 /** 
  * Returns the version number of a class definition.
  * 
- * @param cls A pointer to a \c Class data structure. Pass
+ * @param cls A pointer to a Class data structure. Pass
  *  the class definition for which you wish to obtain the version.
  * 
  * @return An integer indicating the version number of the class definition.
@@ -456,8 +456,8 @@ class_getVersion(Class _Nullable cls)
  *  interface that your class represents to other classes. This is especially useful for object
  *  serialization (that is, archiving of the object in a flattened form), where it is important to
  *  recognize changes to the layout of the instance variables in different class-definition versions.
- * @note Classes derived from the Foundation framework \c NSObject class can set the class-definition
- *  version number using the \c setVersion: class method, which is implemented using the \c class_setVersion function.
+ * @note Classes derived from the Foundation framework NSObject class can set the class-definition
+ *  version number using the setVersion: class method, which is implemented using the class_setVersion function.
  */
 OBJC_EXPORT void
 class_setVersion(Class _Nullable cls, int version)
@@ -468,20 +468,20 @@ class_setVersion(Class _Nullable cls, int version)
  * 
  * @param cls A class object.
  * 
- * @return The size in bytes of instances of the class \e cls, or \c 0 if \e cls is \c Nil.
+ * @return The size in bytes of instances of the class cls, or 0 if cls is Nil.
  */
 OBJC_EXPORT size_t
 class_getInstanceSize(Class _Nullable cls) 
     OBJC_AVAILABLE(10.5, 2.0, 9.0, 1.0, 2.0);
 
 /** 
- * Returns the \c Ivar for a specified instance variable of a given class.
+ * Returns the Ivar for a specified instance variable of a given class.
  * 
  * @param cls The class whose instance variable you wish to obtain.
  * @param name The name of the instance variable definition to obtain.
  * 
- * @return A pointer to an \c Ivar data structure containing information about 
- *  the instance variable specified by \e name.
+ * @return A pointer to an Ivar data structure containing information about
+ *  the instance variable specified by name.
  */
 OBJC_EXPORT Ivar _Nullable
 class_getInstanceVariable(Class _Nullable cls, const char * _Nonnull name)
@@ -493,7 +493,7 @@ class_getInstanceVariable(Class _Nullable cls, const char * _Nonnull name)
  * @param cls The class definition whose class variable you wish to obtain.
  * @param name The name of the class variable definition to obtain.
  * 
- * @return A pointer to an \c Ivar data structure containing information about the class variable specified by \e name.
+ * @return A pointer to an Ivar data structure containing information about the class variable specified by name.
  */
 OBJC_EXPORT Ivar _Nullable
 class_getClassVariable(Class _Nullable cls, const char * _Nonnull name) 
@@ -523,10 +523,10 @@ class_copyIvarList(Class _Nullable cls, unsigned int * _Nullable outCount)
  * @param name The selector of the method you want to retrieve.
  * 
  * @return The method that corresponds to the implementation of the selector specified by 
- *  \e name for the class specified by \e cls, or \c NULL if the specified class or its 
+ *  name for the class specified by cls, or NULL if the specified class or its
  *  superclasses do not contain an instance method with the specified selector.
  *
- * @note This function searches superclasses for implementations, whereas \c class_copyMethodList does not.
+ * @note This function searches superclasses for implementations, whereas class_copyMethodList does not.
  */
 OBJC_EXPORT Method _Nullable
 class_getInstanceMethod(Class _Nullable cls, SEL _Nonnull name)
@@ -536,14 +536,14 @@ class_getInstanceMethod(Class _Nullable cls, SEL _Nonnull name)
  * Returns a pointer to the data structure describing a given class method for a given class.
  * 
  * @param cls A pointer to a class definition. Pass the class that contains the method you want to retrieve.
- * @param name A pointer of type \c SEL. Pass the selector of the method you want to retrieve.
+ * @param name A pointer of type SEL. Pass the selector of the method you want to retrieve.
  * 
- * @return A pointer to the \c Method data structure that corresponds to the implementation of the 
+ * @return A pointer to the Method data structure that corresponds to the implementation of the
  *  selector specified by aSelector for the class specified by aClass, or NULL if the specified 
  *  class or its superclasses do not contain an instance method with the specified selector.
  *
  * @note Note that this function searches superclasses for implementations, 
- *  whereas \c class_copyMethodList does not.
+ *  whereas class_copyMethodList does not.
  */
 OBJC_EXPORT Method _Nullable
 class_getClassMethod(Class _Nullable cls, SEL _Nonnull name)
@@ -556,10 +556,10 @@ class_getClassMethod(Class _Nullable cls, SEL _Nonnull name)
  * @param cls The class you want to inspect.
  * @param name A selector.
  * 
- * @return The function pointer that would be called if \c [object name] were called
- *  with an instance of the class, or \c NULL if \e cls is \c Nil.
+ * @return The function pointer that would be called if [object name] were called
+ *  with an instance of the class, or NULL if cls is Nil.
  *
- * @note \c class_getMethodImplementation may be faster than \c method_getImplementation(class_getInstanceMethod(cls, name)).
+ * @note class_getMethodImplementation may be faster than method_getImplementation(class_getInstanceMethod(cls, name)).
  * @note The function pointer returned may be a function internal to the runtime instead of
  *  an actual method implementation. For example, if instances of the class do not respond to
  *  the selector, the function pointer returned will be part of the runtime's message forwarding machinery.
@@ -575,8 +575,8 @@ class_getMethodImplementation(Class _Nullable cls, SEL _Nonnull name)
  * @param cls The class you want to inspect.
  * @param name A selector.
  * 
- * @return The function pointer that would be called if \c [object name] were called
- *  with an instance of the class, or \c NULL if \e cls is \c Nil.
+ * @return The function pointer that would be called if [object name] were called
+ *  with an instance of the class, or NULL if cls is Nil.
  */
 OBJC_EXPORT IMP _Nullable
 class_getMethodImplementation_stret(Class _Nullable cls, SEL _Nonnull name) 
@@ -589,9 +589,9 @@ class_getMethodImplementation_stret(Class _Nullable cls, SEL _Nonnull name)
  * @param cls The class you want to inspect.
  * @param sel A selector.
  * 
- * @return \c YES if instances of the class respond to the selector, otherwise \c NO.
+ * @return YES if instances of the class respond to the selector, otherwise NO.
  * 
- * @note You should usually use \c NSObject's \c respondsToSelector: or \c instancesRespondToSelector: 
+ * @note You should usually use NSObject's respondsToSelector: or instancesRespondToSelector:
  *  methods instead of this function.
  */
 OBJC_EXPORT BOOL
@@ -611,9 +611,9 @@ class_respondsToSelector(Class _Nullable cls, SEL _Nonnull sel)
  * 
  *  If cls implements no instance methods, or cls is Nil, returns NULL and *outCount is 0.
  * 
- * @note To get the class methods of a class, use \c class_copyMethodList(object_getClass(cls), &count).
+ * @note To get the class methods of a class, use class_copyMethodList(object_getClass(cls), &count).
  * @note To get the implementations of methods that may be implemented by superclasses, 
- *  use \c class_getInstanceMethod or \c class_getClassMethod.
+ *  use class_getInstanceMethod or class_getClassMethod.
  */
 OBJC_EXPORT Method _Nonnull * _Nullable
 class_copyMethodList(Class _Nullable cls, unsigned int * _Nullable outCount) 
@@ -656,9 +656,9 @@ class_copyProtocolList(Class _Nullable cls, unsigned int * _Nullable outCount)
  * @param cls The class you want to inspect.
  * @param name The name of the property you want to inspect.
  * 
- * @return A pointer of type \c objc_property_t describing the property, or
- *  \c NULL if the class does not declare a property with that name, 
- *  or \c NULL if \e cls is \c Nil.
+ * @return A pointer of type objc_property_t describing the property, or
+ *  NULL if the class does not declare a property with that name,
+ *  or NULL if cls is Nil.
  */
 OBJC_EXPORT objc_property_t _Nullable
 class_getProperty(Class _Nullable cls, const char * _Nonnull name)
@@ -669,24 +669,24 @@ class_getProperty(Class _Nullable cls, const char * _Nonnull name)
  * 
  * @param cls The class you want to inspect.
  * @param outCount On return, contains the length of the returned array. 
- *  If \e outCount is \c NULL, the length is not returned.        
+ *  If outCount is NULL, the length is not returned.
  * 
- * @return An array of pointers of type \c objc_property_t describing the properties 
+ * @return An array of pointers of type objc_property_t describing the properties
  *  declared by the class. Any properties declared by superclasses are not included. 
- *  The array contains \c *outCount pointers followed by a \c NULL terminator. You must free the array with \c free().
+ *  The array contains *outCount pointers followed by a NULL terminator. You must free the array with free().
  * 
- *  If \e cls declares no properties, or \e cls is \c Nil, returns \c NULL and \c *outCount is \c 0.
+ *  If cls declares no properties, or cls is Nil, returns NULL and *outCount is 0.
  */
 OBJC_EXPORT objc_property_t _Nonnull * _Nullable
 class_copyPropertyList(Class _Nullable cls, unsigned int * _Nullable outCount)
     OBJC_AVAILABLE(10.5, 2.0, 9.0, 1.0, 2.0);
 
 /** 
- * Returns a description of the \c Ivar layout for a given class.
+ * Returns a description of the Ivar layout for a given class.
  * 
  * @param cls The class to inspect.
  * 
- * @return A description of the \c Ivar layout for \e cls.
+ * @return A description of the Ivar layout for cls.
  */
 OBJC_EXPORT const uint8_t * _Nullable
 class_getIvarLayout(Class _Nullable cls)
@@ -697,7 +697,7 @@ class_getIvarLayout(Class _Nullable cls)
  * 
  * @param cls The class to inspect.
  * 
- * @return A description of the layout of the weak \c Ivars for \e cls.
+ * @return A description of the layout of the weak Ivars for cls.
  */
 OBJC_EXPORT const uint8_t * _Nullable
 class_getWeakIvarLayout(Class _Nullable cls)
@@ -733,13 +733,13 @@ class_addMethod(Class _Nullable cls, SEL _Nonnull name, IMP _Nonnull imp,
  *  Since the function must take at least two arguments—self and _cmd, the second and third characters
  *  must be “@:” (the first character is the return type).
  * 
- * @return The previous implementation of the method identified by \e name for the class identified by \e cls.
+ * @return The previous implementation of the method identified by name for the class identified by cls.
  * 
  * @note This function behaves in two different ways:
- *  - If the method identified by \e name does not yet exist, it is added as if \c class_addMethod were called. 
- *    The type encoding specified by \e types is used as given.
- *  - If the method identified by \e name does exist, its \c IMP is replaced as if \c method_setImplementation were called.
- *    The type encoding specified by \e types is ignored.
+ *  - If the method identified by name does not yet exist, it is added as if class_addMethod were called.
+ *    The type encoding specified by types is used as given.
+ *  - If the method identified by name does exist, its IMP is replaced as if method_setImplementation were called.
+ *    The type encoding specified by types is ignored.
  */
 OBJC_EXPORT IMP _Nullable
 class_replaceMethod(Class _Nullable cls, SEL _Nonnull name, IMP _Nonnull imp, 
@@ -768,9 +768,9 @@ class_addIvar(Class _Nullable cls, const char * _Nonnull name, size_t size,
  * Adds a protocol to a class.
  * 
  * @param cls The class to modify.
- * @param protocol The protocol to add to \e cls.
+ * @param protocol The protocol to add to cls.
  * 
- * @return \c YES if the method was added successfully, otherwise \c NO 
+ * @return YES if the method was added successfully, otherwise NO
  *  (for example, the class already conforms to that protocol).
  */
 OBJC_EXPORT BOOL
@@ -783,9 +783,9 @@ class_addProtocol(Class _Nullable cls, Protocol * _Nonnull protocol)
  * @param cls The class to modify.
  * @param name The name of the property.
  * @param attributes An array of property attributes.
- * @param attributeCount The number of attributes in \e attributes.
+ * @param attributeCount The number of attributes in attributes.
  * 
- * @return \c YES if the property was added successfully, otherwise \c NO
+ * @return YES if the property was added successfully, otherwise NO
  *  (for example, the class already has that property).
  */
 OBJC_EXPORT BOOL
@@ -800,7 +800,7 @@ class_addProperty(Class _Nullable cls, const char * _Nonnull name,
  * @param cls The class to modify.
  * @param name The name of the property.
  * @param attributes An array of property attributes.
- * @param attributeCount The number of attributes in \e attributes. 
+ * @param attributeCount The number of attributes in attributes.
  */
 OBJC_EXPORT void
 class_replaceProperty(Class _Nullable cls, const char * _Nonnull name,
@@ -812,7 +812,7 @@ class_replaceProperty(Class _Nullable cls, const char * _Nonnull name,
  * Sets the Ivar layout for a given class.
  * 
  * @param cls The class to modify.
- * @param layout The layout of the \c Ivars for \e cls.
+ * @param layout The layout of the Ivars for cls.
  */
 OBJC_EXPORT void
 class_setIvarLayout(Class _Nullable cls, const uint8_t * _Nullable layout)
@@ -822,7 +822,7 @@ class_setIvarLayout(Class _Nullable cls, const uint8_t * _Nullable layout)
  * Sets the layout for weak Ivars for a given class.
  * 
  * @param cls The class to modify.
- * @param layout The layout of the weak Ivars for \e cls.
+ * @param layout The layout of the weak Ivars for cls.
  */
 OBJC_EXPORT void
 class_setWeakIvarLayout(Class _Nullable cls, const uint8_t * _Nullable layout)
@@ -855,7 +855,7 @@ objc_getFutureClass(const char * _Nonnull name)
  *  The additional bytes can be used to store additional instance variables beyond 
  *  those defined in the class definition.
  * 
- * @return An instance of the class \e cls.
+ * @return An instance of the class cls.
  */
 OBJC_EXPORT id _Nullable
 class_createInstance(Class _Nullable cls, size_t extraBytes)
@@ -866,12 +866,12 @@ class_createInstance(Class _Nullable cls, size_t extraBytes)
  * Creates an instance of a class at the specific location provided.
  * 
  * @param cls The class that you wish to allocate an instance of.
- * @param bytes The location at which to allocate an instance of \e cls.
- *  Must point to at least \c class_getInstanceSize(cls) bytes of well-aligned,
+ * @param bytes The location at which to allocate an instance of cls.
+ *  Must point to at least class_getInstanceSize(cls) bytes of well-aligned,
  *  zero-filled memory.
  *
- * @return \e bytes on success, \c nil otherwise. (For example, \e cls or \e bytes
- *  might be \c nil)
+ * @return bytes on success, nil otherwise. (For example, cls or bytes
+ *  might be nil)
  *
  * @see class_createInstance
  */
@@ -886,7 +886,7 @@ objc_constructInstance(Class _Nullable cls, void * _Nullable bytes)
  * 
  * @param obj The class instance to destroy.
  * 
- * @return \e obj. Does nothing if \e obj is nil.
+ * @return obj. Does nothing if obj is nil.
  * 
  * @note CF and other clients do call this under GC.
  */
@@ -900,17 +900,17 @@ OBJC_EXPORT void * _Nullable objc_destructInstance(id _Nullable obj)
 /** 
  * Creates a new class and metaclass.
  * 
- * @param superclass The class to use as the new class's superclass, or \c Nil to create a new root class.
+ * @param superclass The class to use as the new class's superclass, or Nil to create a new root class.
  * @param name The string to use as the new class's name. The string will be copied.
  * @param extraBytes The number of bytes to allocate for indexed ivars at the end of 
- *  the class and metaclass objects. This should usually be \c 0.
+ *  the class and metaclass objects. This should usually be 0.
  * 
  * @return The new class, or Nil if the class could not be created (for example, the desired name is already in use).
  * 
- * @note You can get a pointer to the new metaclass by calling \c object_getClass(newClass).
- * @note To create a new class, start by calling \c objc_allocateClassPair. 
- *  Then set the class's attributes with functions like \c class_addMethod and \c class_addIvar.
- *  When you are done building the class, call \c objc_registerClassPair. The new class is now ready for use.
+ * @note You can get a pointer to the new metaclass by calling object_getClass(newClass).
+ * @note To create a new class, start by calling objc_allocateClassPair.
+ *  Then set the class's attributes with functions like class_addMethod and class_addIvar.
+ *  When you are done building the class, call objc_registerClassPair. The new class is now ready for use.
  * @note Instance methods and instance variables should be added to the class itself. 
  *  Class methods should be added to the metaclass.
  */
@@ -920,7 +920,7 @@ objc_allocateClassPair(Class _Nullable superclass, const char * _Nonnull name,
     OBJC_AVAILABLE(10.5, 2.0, 9.0, 1.0, 2.0);
 
 /** 
- * Registers a class that was allocated using \c objc_allocateClassPair.
+ * Registers a class that was allocated using objc_allocateClassPair.
  * 
  * @param cls The class you want to register.
  */
@@ -942,7 +942,7 @@ objc_duplicateClass(Class _Nonnull original, const char * _Nonnull name,
  * Destroy a class and its associated metaclass. 
  * 
  * @param cls The class to be destroyed. It must have been allocated with 
- *  \c objc_allocateClassPair
+ *  objc_allocateClassPair
  * 
  * @warning Do not call if instances of this class or a subclass exist.
  */
@@ -960,7 +960,7 @@ objc_disposeClassPair(Class _Nonnull cls)
  * 
  * @return A pointer of type SEL.
  * 
- * @note To get the method name as a C string, call \c sel_getName(method_getName(method)).
+ * @note To get the method name as a C string, call sel_getName(method_getName(method)).
  */
 OBJC_EXPORT SEL _Nonnull
 method_getName(Method _Nonnull m) 
@@ -982,7 +982,7 @@ method_getImplementation(Method _Nonnull m)
  * 
  * @param m The method to inspect.
  * 
- * @return A C string. The string may be \c NULL.
+ * @return A C string. The string may be NULL.
  */
 OBJC_EXPORT const char * _Nullable
 method_getTypeEncoding(Method _Nonnull m) 
@@ -991,7 +991,7 @@ method_getTypeEncoding(Method _Nonnull m)
 /** 
  * Returns the number of arguments accepted by a method.
  * 
- * @param m A pointer to a \c Method data structure. Pass the method in question.
+ * @param m A pointer to a Method data structure. Pass the method in question.
  * 
  * @return An integer containing the number of arguments accepted by the given method.
  */
@@ -1004,7 +1004,7 @@ method_getNumberOfArguments(Method _Nonnull m)
  * 
  * @param m The method to inspect.
  * 
- * @return A C string describing the return type. You must free the string with \c free().
+ * @return A C string describing the return type. You must free the string with free().
  */
 OBJC_EXPORT char * _Nonnull
 method_copyReturnType(Method _Nonnull m) 
@@ -1016,8 +1016,8 @@ method_copyReturnType(Method _Nonnull m)
  * @param m The method to inspect.
  * @param index The index of the parameter to inspect.
  * 
- * @return A C string describing the type of the parameter at index \e index, or \c NULL
- *  if method has no parameter index \e index. You must free the string with \c free().
+ * @return A C string describing the type of the parameter at index index, or NULL
+ *  if method has no parameter index index. You must free the string with free().
  */
 OBJC_EXPORT char * _Nullable
 method_copyArgumentType(Method _Nonnull m, unsigned int index) 
@@ -1028,10 +1028,10 @@ method_copyArgumentType(Method _Nonnull m, unsigned int index)
  * 
  * @param m The method you want to inquire about. 
  * @param dst The reference string to store the description.
- * @param dst_len The maximum number of characters that can be stored in \e dst.
+ * @param dst_len The maximum number of characters that can be stored in dst.
  *
- * @note The method's return type string is copied to \e dst.
- *  \e dst is filled as if \c strncpy(dst, parameter_type, dst_len) were called.
+ * @note The method's return type string is copied to dst.
+ *  dst is filled as if strncpy(dst, parameter_type, dst_len) were called.
  */
 OBJC_EXPORT void
 method_getReturnType(Method _Nonnull m, char * _Nonnull dst, size_t dst_len) 
@@ -1043,11 +1043,11 @@ method_getReturnType(Method _Nonnull m, char * _Nonnull dst, size_t dst_len)
  * @param m The method you want to inquire about. 
  * @param index The index of the parameter you want to inquire about.
  * @param dst The reference string to store the description.
- * @param dst_len The maximum number of characters that can be stored in \e dst.
+ * @param dst_len The maximum number of characters that can be stored in dst.
  * 
- * @note The parameter type string is copied to \e dst. \e dst is filled as if \c strncpy(dst, parameter_type, dst_len) 
- *  were called. If the method contains no parameter with that index, \e dst is filled as
- *  if \c strncpy(dst, "", dst_len) were called.
+ * @note The parameter type string is copied to dst. dst is filled as if strncpy(dst, parameter_type, dst_len)
+ *  were called. If the method contains no parameter with that index, dst is filled as
+ *  if strncpy(dst, "", dst_len) were called.
  */
 OBJC_EXPORT void
 method_getArgumentType(Method _Nonnull m, unsigned int index, 
@@ -1120,10 +1120,10 @@ ivar_getTypeEncoding(Ivar _Nonnull v)
  * 
  * @param v The instance variable you want to enquire about.
  * 
- * @return The offset of \e v.
+ * @return The offset of v.
  * 
- * @note For instance variables of type \c id or other object types, call \c object_getIvar
- *  and \c object_setIvar instead of using this offset to access the instance variable data directly.
+ * @note For instance variables of type id or other object types, call object_getIvar
+ *  and object_setIvar instead of using this offset to access the instance variable data directly.
  */
 OBJC_EXPORT ptrdiff_t
 ivar_getOffset(Ivar _Nonnull v) 
@@ -1175,8 +1175,8 @@ property_copyAttributeList(objc_property_t _Nonnull property,
  * @param property The property whose attribute value you are interested in.
  * @param attributeName C string representing the attribute name.
  *
- * @return The value string of the attribute \e attributeName if it exists in
- *  \e property, \c nil otherwise. 
+ * @return The value string of the attribute attributeName if it exists in
+ *  property, nil otherwise.
  */
 OBJC_EXPORT char * _Nullable
 property_copyAttributeValue(objc_property_t _Nonnull property,
@@ -1191,7 +1191,7 @@ property_copyAttributeValue(objc_property_t _Nonnull property,
  * 
  * @param name The name of a protocol.
  * 
- * @return The protocol named \e name, or \c NULL if no protocol named \e name could be found.
+ * @return The protocol named name, or NULL if no protocol named name could be found.
  * 
  * @note This function acquires the runtime lock.
  */
@@ -1204,8 +1204,8 @@ objc_getProtocol(const char * _Nonnull name)
  * 
  * @param outCount Upon return, contains the number of protocols in the returned array.
  * 
- * @return A C array of all the protocols known to the runtime. The array contains \c *outCount
- *  pointers followed by a \c NULL terminator. You must free the list with \c free().
+ * @return A C array of all the protocols known to the runtime. The array contains *outCount
+ *  pointers followed by a NULL terminator. You must free the list with free().
  * 
  * @note This function acquires the runtime lock.
  */
@@ -1219,7 +1219,7 @@ objc_copyProtocolList(unsigned int * _Nullable outCount)
  * @param proto A protocol.
  * @param other A protocol.
  * 
- * @return \c YES if \e proto conforms to \e other, otherwise \c NO.
+ * @return YES if proto conforms to other, otherwise NO.
  * 
  * @note One protocol can incorporate other protocols using the same syntax 
  *  that classes use to adopt a protocol:
@@ -1239,7 +1239,7 @@ protocol_conformsToProtocol(Protocol * _Nullable proto,
  * @param proto A protocol.
  * @param other A protocol.
  * 
- * @return \c YES if \e proto is the same as \e other, otherwise \c NO.
+ * @return YES if proto is the same as other, otherwise NO.
  */
 OBJC_EXPORT BOOL
 protocol_isEqual(Protocol * _Nullable proto, Protocol * _Nullable other)
@@ -1250,7 +1250,7 @@ protocol_isEqual(Protocol * _Nullable proto, Protocol * _Nullable other)
  * 
  * @param proto A protocol.
  * 
- * @return The name of the protocol \e p as a C string.
+ * @return The name of the protocol p as a C string.
  */
 OBJC_EXPORT const char * _Nonnull
 protocol_getName(Protocol * _Nonnull proto)
@@ -1264,10 +1264,10 @@ protocol_getName(Protocol * _Nonnull proto)
  * @param isRequiredMethod A Boolean value that indicates whether aSel is a required method.
  * @param isInstanceMethod A Boolean value that indicates whether aSel is an instance method.
  * 
- * @return An \c objc_method_description structure that describes the method specified by \e aSel,
- *  \e isRequiredMethod, and \e isInstanceMethod for the protocol \e p.
- *  If the protocol does not contain the specified method, returns an \c objc_method_description structure
- *  with the value \c {NULL, \c NULL}.
+ * @return An objc_method_description structure that describes the method specified by aSel,
+ *  isRequiredMethod, and isInstanceMethod for the protocol p.
+ *  If the protocol does not contain the specified method, returns an objc_method_description structure
+ *  with the value {NULL, NULL}.
  * 
  * @note This function recursively searches any protocols that this protocol conforms to.
  */
@@ -1286,10 +1286,10 @@ protocol_getMethodDescription(Protocol * _Nonnull proto, SEL _Nonnull aSel,
  *  be instance methods (pass YES to specify instance methods).
  * @param outCount Upon return, contains the number of method description structures in the returned array.
  * 
- * @return A C array of \c objc_method_description structures containing the names and types of \e p's methods 
- *  specified by \e isRequiredMethod and \e isInstanceMethod. The array contains \c *outCount pointers followed
- *  by a \c NULL terminator. You must free the list with \c free().
- *  If the protocol declares no methods that meet the specification, \c NULL is returned and \c *outCount is 0.
+ * @return A C array of objc_method_description structures containing the names and types of p's methods
+ *  specified by isRequiredMethod and isInstanceMethod. The array contains *outCount pointers followed
+ *  by a NULL terminator. You must free the list with free().
+ *  If the protocol declares no methods that meet the specification, NULL is returned and *outCount is 0.
  * 
  * @note Methods in other protocols adopted by this protocol are not included.
  */
@@ -1305,11 +1305,11 @@ protocol_copyMethodDescriptionList(Protocol * _Nonnull proto,
  * 
  * @param proto A protocol.
  * @param name The name of a property.
- * @param isRequiredProperty \c YES searches for a required property, \c NO searches for an optional property.
- * @param isInstanceProperty \c YES searches for an instance property, \c NO searches for a class property.
+ * @param isRequiredProperty YES searches for a required property, NO searches for an optional property.
+ * @param isInstanceProperty YES searches for an instance property, NO searches for a class property.
  * 
- * @return The property specified by \e name, \e isRequiredProperty, and \e isInstanceProperty for \e proto,
- *  or \c NULL if none of \e proto's properties meets the specification.
+ * @return The property specified by name, isRequiredProperty, and isInstanceProperty for proto,
+ *  or NULL if none of proto's properties meets the specification.
  */
 OBJC_EXPORT objc_property_t _Nullable
 protocol_getProperty(Protocol * _Nonnull proto,
@@ -1335,13 +1335,13 @@ protocol_copyPropertyList(Protocol * _Nonnull proto,
  * 
  * @param proto A protocol.
  * @param outCount Upon return, contains the number of elements in the returned array.
- * @param isRequiredProperty \c YES returns required properties, \c NO returns optional properties.
- * @param isInstanceProperty \c YES returns instance properties, \c NO returns class properties.
+ * @param isRequiredProperty YES returns required properties, NO returns optional properties.
+ * @param isInstanceProperty YES returns instance properties, NO returns class properties.
  * 
- * @return A C array of pointers of type \c objc_property_t describing the properties declared by \e proto.
+ * @return A C array of pointers of type objc_property_t describing the properties declared by proto.
  *  Any properties declared by other protocols adopted by this protocol are not included. The array contains
- *  \c *outCount pointers followed by a \c NULL terminator. You must free the array with \c free().
- *  If the protocol declares no matching properties, \c NULL is returned and \c *outCount is \c 0.
+ *  *outCount pointers followed by a NULL terminator. You must free the array with free().
+ *  If the protocol declares no matching properties, NULL is returned and *outCount is 0.
  */
 OBJC_EXPORT objc_property_t _Nonnull * _Nullable
 protocol_copyPropertyList2(Protocol * _Nonnull proto,
@@ -1355,9 +1355,9 @@ protocol_copyPropertyList2(Protocol * _Nonnull proto,
  * @param proto A protocol.
  * @param outCount Upon return, contains the number of elements in the returned array.
  * 
- * @return A C array of protocols adopted by \e proto. The array contains \e *outCount pointers
- *  followed by a \c NULL terminator. You must free the array with \c free().
- *  If the protocol declares no properties, \c NULL is returned and \c *outCount is \c 0.
+ * @return A C array of protocols adopted by proto. The array contains *outCount pointers
+ *  followed by a NULL terminator. You must free the array with free().
+ *  If the protocol declares no properties, NULL is returned and *outCount is 0.
  */
 OBJC_EXPORT Protocol * __unsafe_unretained _Nonnull * _Nullable
 protocol_copyProtocolList(Protocol * _Nonnull proto,
@@ -1366,11 +1366,11 @@ protocol_copyProtocolList(Protocol * _Nonnull proto,
 
 /** 
  * Creates a new protocol instance that cannot be used until registered with
- * \c objc_registerProtocol()
+ * objc_registerProtocol()
  * 
  * @param name The name of the protocol to create.
  *
- * @return The Protocol instance on success, \c nil if a protocol
+ * @return The Protocol instance on success, nil if a protocol
  *  with the same name already exists. 
  * @note There is no dispose method for this. 
  */
@@ -1409,7 +1409,7 @@ protocol_addMethodDescription(Protocol * _Nonnull proto, SEL _Nonnull name,
  * must be already constructed.
  * 
  * @param proto The protocol you want to add to, it must be under construction.
- * @param addition The protocol you want to incorporate into \e proto, it must be registered.
+ * @param addition The protocol you want to incorporate into proto, it must be registered.
  */
 OBJC_EXPORT void
 protocol_addProtocol(Protocol * _Nonnull proto, Protocol * _Nonnull addition) 
@@ -1421,7 +1421,7 @@ protocol_addProtocol(Protocol * _Nonnull proto, Protocol * _Nonnull addition)
  * @param proto The protocol to add a property to.
  * @param name The name of the property.
  * @param attributes An array of property attributes.
- * @param attributeCount The number of attributes in \e attributes.
+ * @param attributeCount The number of attributes in attributes.
  * @param isRequiredProperty YES if the property (accessor methods) is not optional. 
  * @param isInstanceProperty YES if the property (accessor methods) are instance methods. 
  *  This is the only case allowed fo a property, as a result, setting this to NO will 
@@ -1479,7 +1479,7 @@ objc_copyClassNamesForImage(const char * _Nonnull image,
 /** 
  * Returns the name of the method specified by a given selector.
  * 
- * @param sel A pointer of type \c SEL. Pass the selector whose name you wish to determine.
+ * @param sel A pointer of type SEL. Pass the selector whose name you wish to determine.
  * 
  * @return A C string indicating the name of the selector.
  */
@@ -1510,7 +1510,7 @@ sel_registerName(const char * _Nonnull str)
  * @param lhs The selector to compare with rhs.
  * @param rhs The selector to compare with lhs.
  * 
- * @return \c YES if \e lhs and \e rhs are equal, otherwise \c NO.
+ * @return YES if lhs and rhs are equal, otherwise NO.
  * 
  * @note sel_isEqual is equivalent to ==.
  */
@@ -1562,10 +1562,10 @@ objc_setForwardHandler(void * _Nonnull fwd, void * _Nonnull fwd_stret)
  * @param block The block that implements this method. Its signature should
  *  be: method_return_type ^(id self, method_args...). 
  *  The selector is not available as a parameter to this block.
- *  The block is copied with \c Block_copy().
+ *  The block is copied with Block_copy().
  * 
  * @return The IMP that calls this block. Must be disposed of with
- *  \c imp_removeBlock.
+ *  imp_removeBlock.
  */
 OBJC_EXPORT IMP _Nonnull
 imp_implementationWithBlock(id _Nonnull block)
@@ -1573,11 +1573,11 @@ imp_implementationWithBlock(id _Nonnull block)
 
 /** 
  * Return the block associated with an IMP that was created using
- * \c imp_implementationWithBlock.
+ * imp_implementationWithBlock.
  * 
  * @param anImp The IMP that calls this block.
  * 
- * @return The block called by \e anImp.
+ * @return The block called by anImp.
  */
 OBJC_EXPORT id _Nullable
 imp_getBlock(IMP _Nonnull anImp)
@@ -1585,10 +1585,10 @@ imp_getBlock(IMP _Nonnull anImp)
 
 /** 
  * Disassociates a block from an IMP that was created using
- * \c imp_implementationWithBlock and releases the copy of the 
+ * imp_implementationWithBlock and releases the copy of the
  * block that was created.
  * 
- * @param anImp An IMP that was created using \c imp_implementationWithBlock.
+ * @param anImp An IMP that was created using imp_implementationWithBlock.
  * 
  * @return YES if the block was released successfully, NO otherwise. 
  *  (For example, the block might not have been used to create an IMP previously).
@@ -1605,7 +1605,7 @@ imp_removeBlock(IMP _Nonnull anImp)
  * 
  * @param location The weak pointer address
  * 
- * @return The object pointed to by \e location, or \c nil if \e *location is \c nil.
+ * @return The object pointed to by location, or nil if *location is nil.
  */
 OBJC_EXPORT id _Nullable
 objc_loadWeak(id _Nullable * _Nonnull location)
@@ -1618,7 +1618,7 @@ objc_loadWeak(id _Nullable * _Nonnull location)
  * @param location The address of the weak pointer itself
  * @param obj The new object this weak ptr should now point to
  * 
- * @return The value stored into \e location, i.e. \e obj
+ * @return The value stored into location, i.e. obj
  */
 OBJC_EXPORT id _Nullable
 objc_storeWeak(id _Nullable * _Nonnull location, id _Nullable obj) 
@@ -1665,7 +1665,7 @@ objc_setAssociatedObject(id _Nonnull object, const void * _Nonnull key,
  * @param object The source object for the association.
  * @param key The key for the association.
  * 
- * @return The value associated with the key \e key for \e object.
+ * @return The value associated with the key key for object.
  * 
  * @see objc_setAssociatedObject
  */
@@ -1681,7 +1681,7 @@ objc_getAssociatedObject(id _Nonnull object, const void * _Nonnull key)
  * @note The main purpose of this function is to make it easy to return an object 
  *  to a "pristine state”. You should not use this function for general removal of
  *  associations from objects, since it also removes associations that other clients
- *  may have added to the object. Typically you should use \c objc_setAssociatedObject 
+ *  may have added to the object. Typically you should use objc_setAssociatedObject
  *  with a nil value to clear an association.
  * 
  * @see objc_setAssociatedObject

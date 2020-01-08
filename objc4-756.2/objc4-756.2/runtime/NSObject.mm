@@ -359,7 +359,7 @@ storeWeak(id *location, objc_object *newObj)
  * @param location The address of the weak pointer itself
  * @param newObj The new object this weak ptr should now point to
  * 
- * @return \e newObj
+ * @return newObj
  */
 id
 objc_storeWeak(id *location, id newObj)
@@ -523,7 +523,7 @@ objc_loadWeakRetained(id *location)
  * 
  * @param location The weak pointer address
  * 
- * @return The object pointed to by \e location, or \c nil if \e location is \c nil.
+ * @return The object pointed to by location, or nil if location is nil.
  */
 id
 objc_loadWeak(id *location)

@@ -131,7 +131,7 @@ typedef id _Nullable (*IMP)(id _Nonnull, SEL _Nonnull, ...);
 /** 
  * Returns the name of the method specified by a given selector.
  * 
- * @param sel A pointer of type \c SEL. Pass the selector whose name you wish to determine.
+ * @param sel A pointer of type SEL. Pass the selector whose name you wish to determine.
  * 
  * @return A C string indicating the name of the selector.
  */
@@ -158,7 +158,7 @@ OBJC_EXPORT SEL _Nonnull sel_registerName(const char * _Nonnull str)
  * 
  * @param obj An Objective-C object.
  * 
- * @return The name of the class of which \e obj is an instance.
+ * @return The name of the class of which obj is an instance.
  */
 OBJC_EXPORT const char * _Nonnull object_getClassName(id _Nullable obj)
     OBJC_AVAILABLE(10.0, 2.0, 9.0, 1.0, 2.0);
@@ -168,11 +168,11 @@ OBJC_EXPORT const char * _Nonnull object_getClassName(id _Nullable obj)
  * 
  * @param obj An Objective-C object.
  * 
- * @return A pointer to any extra bytes allocated with \e obj. If \e obj was
+ * @return A pointer to any extra bytes allocated with obj. If obj was
  *   not allocated with any extra bytes, then dereferencing the returned pointer is undefined.
  * 
  * @note This function returns a pointer to any extra bytes allocated with the instance
- *  (as specified by \c class_createInstance with extraBytes>0). This memory follows the
+ *  (as specified by class_createInstance with extraBytes>0). This memory follows the
  *  object's ordinary ivars, but may not be adjacent to the last ivar.
  * @note The returned pointer is guaranteed to be pointer-size aligned, even if the area following
  *  the object's last ivar is less aligned than that. Alignment greater than pointer-size is never
@@ -203,10 +203,10 @@ OBJC_EXPORT BOOL sel_isMapped(SEL _Nonnull sel)
  * 
  * @return A pointer of type SEL specifying the selector for the named method.
  * 
- * @note The implementation of this method is identical to the implementation of \c sel_registerName.
+ * @note The implementation of this method is identical to the implementation of sel_registerName.
  * @note Prior to OS X version 10.0, this method tried to find the selector mapped to the given name
- *  and returned \c NULL if the selector was not found. This was changed for safety, because it was
- *  observed that many of the callers of this function did not check the return value for \c NULL.
+ *  and returned NULL if the selector was not found. This was changed for safety, because it was
+ *  observed that many of the callers of this function did not check the return value for NULL.
  */
 OBJC_EXPORT SEL _Nonnull sel_getUid(const char * _Nonnull str)
     OBJC_AVAILABLE(10.0, 2.0, 9.0, 1.0, 2.0);

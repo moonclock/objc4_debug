@@ -99,7 +99,7 @@ typedef void (*objc_exception_handler)(id _Nullable unused,
 
 /** 
  * Throw a runtime exception. This function is inserted by the compiler
- * where \c @throw would otherwise be.
+ * where @throw would otherwise be.
  * 
  * @param exception The exception to be thrown.
  */

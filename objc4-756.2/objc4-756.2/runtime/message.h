@@ -76,10 +76,10 @@ objc_msgSendSuper(void /* struct objc_super *super, SEL op, ... */ )
  * @return The return value of the method.
  * 
  * @note When it encounters a method call, the compiler generates a call to one of the
- *  functions \c objc_msgSend, \c objc_msgSend_stret, \c objc_msgSendSuper, or \c objc_msgSendSuper_stret.
- *  Messages sent to an object’s superclass (using the \c super keyword) are sent using \c objc_msgSendSuper; 
- *  other messages are sent using \c objc_msgSend. Methods that have data structures as return values
- *  are sent using \c objc_msgSendSuper_stret and \c objc_msgSend_stret.
+ *  functions objc_msgSend, objc_msgSend_stret, objc_msgSendSuper, or objc_msgSendSuper_stret.
+ *  Messages sent to an object’s superclass (using the super keyword) are sent using objc_msgSendSuper; 
+ *  other messages are sent using objc_msgSend. Methods that have data structures as return values
+ *  are sent using objc_msgSendSuper_stret and objc_msgSend_stret.
  */
 OBJC_EXPORT id _Nullable
 objc_msgSend(id _Nullable self, SEL _Nonnull op, ...)
@@ -87,14 +87,14 @@ objc_msgSend(id _Nullable self, SEL _Nonnull op, ...)
 /** 
  * Sends a message with a simple return value to the superclass of an instance of a class.
  * 
- * @param super A pointer to an \c objc_super data structure. Pass values identifying the
+ * @param super A pointer to an objc_super data structure. Pass values identifying the
  *  context the message was sent to, including the instance of the class that is to receive the
  *  message and the superclass at which to start searching for the method implementation.
  * @param op A pointer of type SEL. Pass the selector of the method that will handle the message.
  * @param ...
  *   A variable argument list containing the arguments to the method.
  * 
- * @return The return value of the method identified by \e op.
+ * @return The return value of the method identified by op.
  * 
  * @see objc_msgSend
  */
@@ -195,8 +195,8 @@ objc_msgSend_fp2ret(void /* id self, SEL op, ... */ )
  * @see objc_msgSend
  * @note On the i386 platform, the ABI for functions returning a floating-point value is
  *  incompatible with that for functions returning an integral type. On the i386 platform, therefore, 
- *  you must use \c objc_msgSend_fpret for functions returning non-integral type. For \c float or 
- *  \c long \c double return types, cast the function to an appropriate function pointer type first.
+ *  you must use objc_msgSend_fpret for functions returning non-integral type. For float or 
+ *  long double return types, cast the function to an appropriate function pointer type first.
  */
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wincompatible-library-redeclaration"

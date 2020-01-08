@@ -473,7 +473,7 @@ _objc_getTaggedPointerSignedValue(const void * _Nullable ptr)
  * @param name An Objective-C selector.
  *
  * @return The IMP corresponding to the instance method implemented by
- * the class of \e obj.
+ * the class of obj.
  * 
  * @note Equivalent to:
  *
@@ -504,8 +504,8 @@ object_getMethodImplementation_stret(id _Nullable obj, SEL _Nonnull name)
  *
  * @return A NULL-terminated C array of selectors which could not be added. A
  * method cannot be added when a method of that name already exists on that
- * class. When no failures occur, the return value is \c NULL. When a non-NULL
- * value is returned, the caller must free the array with \c free().
+ * class. When no failures occur, the return value is NULL. When a non-NULL
+ * value is returned, the caller must free the array with free().
  *
  */
 #if __OBJC2__
