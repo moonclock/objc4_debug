@@ -91,7 +91,9 @@ enum HaveNew { DontHaveNew = false, DoHaveNew = true };
 
 struct SideTable {
     spinlock_t slock;
+    // 负责引用计数相关 map
     RefcountMap refcnts;
+    // 对象弱引用相关 table
     weak_table_t weak_table;
 
     SideTable() {
@@ -162,6 +164,9 @@ void SideTable::unlockTwo<DontHaveOld, DoHaveNew>
 // libc calls us before our C++ initializers run. We also don't want a global 
 // pointer to this struct because of the extra indirection.
 // Do it the hard way.
+// 我们不能用C++静态初始化方法去初始化SideTables，
+// 因为C++初始化方法运行之前libc就会调用我们；我们同样不想用一个全局的指针去指向SideTables，
+// 因为需要额外的代价。但是没办法我们只能这样。
 alignas(StripedMap<SideTable>) static uint8_t 
     SideTableBuf[sizeof(StripedMap<SideTable>)];
 
