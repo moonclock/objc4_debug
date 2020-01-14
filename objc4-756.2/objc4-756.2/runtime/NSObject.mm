@@ -174,7 +174,9 @@ static void SideTableInit() {
     new (SideTableBuf) StripedMap<SideTable>();
 }
 
+// StripedMap 是一个模板类，定义于 objc-private.h 文件中，提供了一个以地址为键值的哈希结构。
 static StripedMap<SideTable>& SideTables() {
+    // reinterpret_cast 是 C++ 标准转换运算符，用来处理无关类型之间的转换，它会产生一个新的值，这个值会有与原始参数（expressoin）有完全相同的比特位。
     return *reinterpret_cast<StripedMap<SideTable>*>(SideTableBuf);
 }
 
@@ -276,42 +278,58 @@ storeWeak(id *location, objc_object *newObj)
     assert(haveOld  ||  haveNew);
     if (!haveNew) assert(newObj == nil);
 
+    // 用于标记已经初始化的类
     Class previouslyInitializedClass = nil;
     id oldObj;
+    // 声明新旧辅助表
+    // SideTable 也是作为全局对象用于管理所有对象的引用计数和 weak 表，在 runtime 启动时就和主线程的 AutoreleasePool 一同创建。
     SideTable *oldTable;
     SideTable *newTable;
 
     // Acquire locks for old and new values.
     // Order by lock address to prevent lock ordering problems. 
     // Retry if the old value changes underneath us.
+    // 获取新旧值（存在的话）的辅助表，并且加锁，
+    // 如果新旧值辅助表同时存在时，以锁的地址大小排序，防止锁的顺序问题
  retry:
     if (haveOld) {
+        // 如果有旧值的话，通过指针获取目标对象，
+        // 再以目标对象的地址为索引，取得旧值对应的辅助表
+        // 这个 SideTables() 方法返回的是一个 StripedMap 哈希表，以对象的地址作为键值返回对应的 SideTable。
         oldObj = *location;
         oldTable = &SideTables()[oldObj];
     } else {
         oldTable = nil;
     }
     if (haveNew) {
+        // 如果有新值，以新值的地址为索引，取得新值对应的辅助表
         newTable = &SideTables()[newObj];
     } else {
         newTable = nil;
     }
-
+    // 加锁
     SideTable::lockTwo<haveOld, haveNew>(oldTable, newTable);
 
     if (haveOld  &&  *location != oldObj) {
+        // 线程冲突处理:
+        // 如果有旧值，但 location 指向的对象不为 oldObj，那很可能被其它线程修改过，
+        // 解锁并重试
         SideTable::unlockTwo<haveOld, haveNew>(oldTable, newTable);
         goto retry;
     }
 
     // Prevent a deadlock between the weak reference machinery
-    // and the +initialize machinery by ensuring that no 
+    // and the +initialize machinery by ensuring that no
     // weakly-referenced object has an un-+initialized isa.
+    // 确保新值的 isa 已经调用 +initialize 初始化，
+    // 避免弱引用机制和 +initialize 机制间的死锁
     if (haveNew  &&  newObj) {
         Class cls = newObj->getIsa();
         if (cls != previouslyInitializedClass  &&  
             !((objc_class *)cls)->isInitialized()) 
         {
+            // 新值 isa 非空，并且未初始化，
+            // 解锁
             SideTable::unlockTwo<haveOld, haveNew>(oldTable, newTable);
             class_initialize(cls, (id)newObj);
 
@@ -321,6 +339,11 @@ storeWeak(id *location, objc_object *newObj)
             // then we may proceed but it will appear initializing and 
             // not yet initialized to the check above.
             // Instead set previouslyInitializedClass to recognize it on retry.
+            
+            // 如果这个 isa 正在当前线程运行 +initialize
+            //（例如在 +initialize 方法里对自己的实例调用了 storeWeak ），
+            // 很显然会处于一个正在初始化，但未初始化完的状态，
+            // 所以设置 previouslyInitializedClass 为这个类进行标记
             previouslyInitializedClass = cls;
 
             goto retry;
@@ -329,17 +352,22 @@ storeWeak(id *location, objc_object *newObj)
 
     // Clean up old value, if any.
     if (haveOld) {
+        // 从 oldObj 的弱引用条目删除弱引用的地址
         weak_unregister_no_lock(&oldTable->weak_table, oldObj, location);
     }
 
     // Assign new value, if any.
     if (haveNew) {
+        // 把弱引用的地址注册到 newOjb 的弱引用条目
         newObj = (objc_object *)
             weak_register_no_lock(&newTable->weak_table, (id)newObj, location, 
                                   crashIfDeallocating);
         // weak_register_no_lock returns nil if weak store should be rejected
 
         // Set is-weakly-referenced bit in refcount table.
+        
+        // 如果 weakStore 操作应该被拒绝，weak_register_no_lock 会返回 nil，否则
+        // 对被引用对象设置弱引用标记位（is-weakly-referenced bit）
         if (newObj  &&  !newObj->isTaggedPointer()) {
             newObj->setWeaklyReferenced_nolock();
         }
