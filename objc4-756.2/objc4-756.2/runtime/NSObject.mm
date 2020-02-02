@@ -93,7 +93,7 @@ struct SideTable {
     spinlock_t slock;
     // 负责引用计数相关 map
     RefcountMap refcnts;
-    // 对象弱引用相关 table
+    // 对象弱引用相关 table - weak 表
     weak_table_t weak_table;
 
     SideTable() {

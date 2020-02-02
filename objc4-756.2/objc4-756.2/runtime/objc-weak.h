@@ -117,9 +117,13 @@ struct weak_entry_t {
  * and weak_entry_t structs as their values.
  */
 struct weak_table_t {
+    // 弱引用条目列表
     weak_entry_t *weak_entries;
+    // 条目数量
     size_t    num_entries;
+    // 条目列表大小
     uintptr_t mask;
+    // 最大哈希偏移值
     uintptr_t max_hash_displacement;
 };
 
